@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TopLine Limited</title>
+    {% load static %}
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/jquery.bxslider.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/animate.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/style.css' %}">
+
+</head>
+
+<body>
+
+  <div class="loader"></div>
+  <div id="myDiv">
+    <!--HEADER-->
+      <div class="bg-color" style="min-height: 90px;  background-color: rgb(73, 84, 105);">
+
+        <header id="main-header">
+          <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+                <a class="navbar-brand" href="#">Top<span class="logo-dec">Line</span></a>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="{% url 'vehicle:home' %}">Home</a></li>
+                  <li class=""><a href="{% url 'vehicle:car-details' %}">Vehicles</a> </li>
+                  <li class=""><a href="{% url 'vehicle:insurance-details' %}">Insurance</a> </li>
+                  <li class=""><a href="{% url 'vehicle:logbook-details' %}">Logbook</a> </li>
+                  <li class=""><a href="#contact">Contact Us</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
+      </div>
+  <!-------------------------Beginning of filters ---------------------->
+
+  <h1 class="bnr-title text-center wow fadeIn delay-05s">Filter Vehicles</h1>
+
+  <div class="row" style="padding-top: 2rem;padding-left: 1em;padding-right: 1em;">
+
+      <div class="col-md-4 col-xs-12 col-sm-6">
+            <h6 class="bnr-title text-center wow fadeIn delay-05s">Search by Vehicle Registration Number i.e KAP...</h6>
+          <form action="#" method="GET">
+              <div class="row">
+                  <div class="col-md-8 col-xs-8">
+                        <input class="form-control" type="text" name="plate_no" value="{{ request.GET.plate_no }}">
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                        <input class="form-control" type="submit" value="Search">
+                  </div>
+              </div>
+
+
+          </form>
+      </div>
+      <div class="col-md-4 col-xs-12 col-sm-6">
+          <h6 class="bnr-title text-center wow fadeIn delay-05s">Find by date of expiry </h6>
+          <form action="#" method="GET">
+              <div class="row">
+                  <div class="col-md-8 col-xs-8">
+                        <input class="form-control" type="date" name="date" value="{{ request.GET.date }}">
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                        <input class="form-control" type="submit" value="Filter">
+                  </div>
+              </div>
+
+
+          </form>
+      </div>
+      <div class="col-md-4 col-xs-0 col-sm-0"></div>
+  </div>
+  <hr>
+  <!-------------End of Filter ----------------------->
+
+      <h1 class="bnr-title text-center wow fadeIn delay-05s">The Vehicles You are managing</h1>
+
+
+
+  <div class="row" style="padding: 1em;">
+  {% if request.GET.date %}
+      <h4 style="padding-left: 1em;">The following are expiring on {{ request.GET.date }}</h4>
+      {% for b in  object_list %}
+          <div class="col-md-3">
+                 <div class="card" style="width: 100%;">
+                  <img src="{{ b.car.vehicle_image.url }}" class="list-item" style="width: 100%; height: 20rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ b.car.logbook.vehicle_registration }}</li>
+                    <li class="list-group-item">{{ b.car.car_owner }}</li>
+                    <li class="list-group-item">{{ b.car.logbook.color }}</li>
+                  </ul>
+                </div>
+          </div>
+      {% endfor %}
+      {% elif request.GET.plate_no %}
+      <h4 style="padding-left: 1em;">The following are the result of {{ request.GET.plate_no }}:</h4>
+      {% for b in  object_list %}
+          <div class="col-md-3">
+                 <div class="card" style="width: 100%;">
+                  <img src="{{ b.vehicle_image.url }}" class="list-item" style="width: 100%; height: 20rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ b.logbook.vehicle_registration }}</li>
+                    <li class="list-group-item">{{ b.car_owner }}</li>
+                    <li class="list-group-item">{{ b.logbook.color }}</li>
+                  </ul>
+                </div>
+          </div>
+      {% endfor %}
+      {% else %}
+      {% for b in  object_list %}
+          <div class="col-md-3">
+                 <div class="card" style="width: 100%;">
+                  <img src="{{ b.vehicle_image.url }}" class="list-item" style="width: 100%; height: 20rem;">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ b.logbook.vehicle_registration }}</li>
+                    <li class="list-group-item">{{ b.car_owner }}</li>
+                    <li class="list-group-item">{{ b.logbook.color }}</li>
+                  </ul>
+                </div>
+          </div>
+      {% endfor %}
+  {% endif %}
+
+
+
+  </div>
+
+<section id="contact" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center white">
+            <h2 class="service-title pad-bt15">Keep in touch with us</h2>
+            <p class="sub-title pad-bt15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>tempor incididunt ut labore et dolore magna aliqua.</p>
+            <hr class="bottom-line white-bg">
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="loction-info white">
+              <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>Bibi wa shafi Road<br>Mombasa, TX 85789</p>
+              <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>bassamalchinsky96@gmail.com</p>
+              <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+254 717689969</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="contact-form">
+              <div id="sendmessage">Your message has been sent. Thank you!</div>
+              <div id="errormessage"></div>
+              <form action="" method="post" role="form" class="contactForm">
+                <div class="col-md-6 padding-right-zero">
+                  <div class="form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                    <div class="validation"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                    <div class="validation"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                    <div class="validation"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                    <div class="validation"></div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-submit">SEND NOW</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!---->
+    <!---->
+    <footer id="footer">
+      <div class="container">
+        <div class="row text-center">
+          <p>&copy;All Rights Reserved. 2020</p>
+          <div class="credits">
+            <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Baker
+            -->
+            Designed by <a href="#">Alchinsky Milevisky</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!---->
+  </div>
+  <script src="{% static 'vehicle/js/jquery.min.js' %}"></script>
+  <script src="{% static 'vehicle/js/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'vehicle/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'vehicle/js/wow.js' %}"></script>
+  <script src="{% static 'vehicle/js/jquery.bxslider.min.js' %}"></script>
+  <script src="{% static 'vehicle/js/custom.js' %}"></script>
+  <script src="{% static 'vehicle/contactform/contactform.js' %}"></script>
+</body>
+</html>

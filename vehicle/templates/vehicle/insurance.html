@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TopLine Limited</title>
+    {% load static %}
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/jquery.bxslider.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/animate.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'vehicle/css/style.css' %}">
+    <style>
+
+        .modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #888;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+        {% for d in object_list %}
+            .close{{ d.id }} {
+              color: white;
+              float: right;
+              font-size: 28px;
+              font-weight: bold;
+            }
+
+            .close{{ d.id }}:hover,
+            .close{{ d.id }}:focus {
+              color: #000;
+              text-decoration: none;
+              cursor: pointer;
+            }
+        {% endfor %}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: transparent;
+  color: black;
+}
+
+    </style>
+
+</head>
+
+<body>
+
+  <div class="loader"></div>
+  <div id="myDiv">
+    <!--HEADER-->
+      <div class="bg-color" style="min-height: 90px;  background-color: rgb(73, 84, 105);">
+
+        <header id="main-header">
+          <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+                <a class="navbar-brand" href="#">Top<span class="logo-dec">Line</span></a>
+              </div>
+              <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="active"><a href="{% url 'vehicle:home' %}">Home</a></li>
+                  <li class=""><a href="{% url 'vehicle:car-details' %}">Vehicles</a> </li>
+                  <li class=""><a href="{% url 'vehicle:insurance-details' %}">Insurance</a> </li>
+                  <li class=""><a href="{% url 'vehicle:logbook-details' %}">Logbook</a> </li>
+                  <li class=""><a href="#contact">Contact Us</a></li>
+                  <li class=""><a href="{% url 'admin:index' %}">Admin</a> </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </header>
+      </div>
+  <!-------------------------other section ---------------------->
+        <h1 class="bnr-title text-center wow fadeIn delay-05s">Insurance Details</h1>
+  <div class="row" style="padding-top: 2rem;">
+
+      <div class="col-md-4 col-xs-12 col-sm-6">
+          <h6 class="bnr-title text-center wow fadeIn delay-05s">Find by date of expiry </h6>
+          <div class="col-md-12 col-xs-12">
+              <form action="#" method="GET">
+                  <div class="row">
+                      <div class="col-md-8 col-xs-8">
+                            <input class="form-control" type="date" name="date" value="{{ request.GET.date }}">
+                      </div>
+                      <div class="col-md-4 col-xs-4">
+                            <input class="form-control" type="submit" value="Filter">
+                      </div>
+                  </div>
+
+
+              </form>
+          </div>
+      </div>
+      <div class="col-md-4 col-xs-12 col-sm-6">
+                    <h6 class="bnr-title text-center wow fadeIn delay-05s">Action i.e all to view all insurance policies</h6>
+          <div class="col-md-6 col-xs-6 col-sm-6">
+              <form action="#" method="GET">
+                  <input type="submit" value="Show all " name="all" class="form-control">
+              </form>
+          </div>
+          <div class="col-md-6 col-xs-6 col-sm-6">
+              <form action="#" method="GET">
+                  <input type="submit"  class="form-control"  name="less" value="This week">
+              </form>
+          </div>
+      </div>
+  </div>
+    <hr>
+  {% if request.GET.date %}
+      <h1 class="bnr-title text-center wow fadeIn delay-05s">The following are expiring on {{ request.GET.date }}</h1>
+      {% elif request.GET.less %}
+      <h1 class="bnr-title text-center wow fadeIn delay-05s">The following are expiring this week</h1>
+
+      {% elif request.GET.all %}
+      <h1 class="bnr-title text-center wow fadeIn delay-05s">List of All Insurance policies</h1>
+      {% else %}
+      <h1 class="bnr-title text-center wow fadeIn delay-05s">The following are expiring this week</h1>
+
+
+
+
+  {% endif %}
+
+      <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Car</th>
+          <th scope="col">Insurer</th>
+          <th scope="col">Insured</th>
+          <th scope="col">Policy Number</th>
+          <th scope="col">Expiry Date</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for b in  object_list %}
+        <tr>
+            <th scope="row"><a href="#" id="myBtn{{ b.id }}">{{ b.car.logbook.vehicle_registration }}</a></th>
+          <td>{{ b.insurer }}</td>
+          <td>{{ b.car.car_owner }}</td>
+          <td>{{ b.policy_number }}</td>
+          <td>{{ b.expiry_date }}</td>
+        </tr>
+          <div id="myModal{{ b.id }}" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+            <div class="modal-header">
+              <span class="close{{ b.id }}">&times;</span>
+             <div class="col-md-12 col-xs-12">
+                     <div class="card" style="width: 100%;">
+                      <img src="{{ b.insurance_image.url }}" class="list-item" style="width: 100%; height: 30rem;">
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ b.car }}</li>
+                        <li class="list-group-item">{{ b.insurer }}</li>
+                        <li class="list-group-item">{{ b.policy_number }}</li>
+                      </ul>
+                    </div>
+              </div>
+      </div>
+
+    </div>
+          </div>
+      {% endfor %}
+      </tbody>
+    </table>
+
+
+
+
+<!-------------------------------------Contact Session------------------------------>
+
+<section id="contact" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center white">
+            <h2 class="service-title pad-bt15">Keep in touch with us</h2>
+            <p class="sub-title pad-bt15">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod<br>tempor incididunt ut labore et dolore magna aliqua.</p>
+            <hr class="bottom-line white-bg">
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="loction-info white">
+              <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>Bibi wa shafi Road<br>Mombasa, TX 85789</p>
+              <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>bassamalchinsky96@gmail.com</p>
+              <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+254 717689969</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <div class="contact-form">
+              <div id="sendmessage">Your message has been sent. Thank you!</div>
+              <div id="errormessage"></div>
+              <form action="" method="post" role="form" class="contactForm">
+                <div class="col-md-6 padding-right-zero">
+                  <div class="form-group">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                    <div class="validation"></div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                    <div class="validation"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                    <div class="validation"></div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                    <div class="validation"></div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-submit">SEND NOW</button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!---->
+    <!---->
+    <footer id="footer">
+      <div class="container">
+        <div class="row text-center">
+          <p>&copy;All Rights Reserved. 2020</p>
+          <div class="credits">
+            <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Baker
+            -->
+            Designed by <a href="#">Alchinsky Milevisky</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!---->
+  </div>
+  <script>
+
+{% for c in object_list %}
+    var modal = document.getElementById("myModal{{ c.id }}");
+    var btn = document.getElementById("myBtn{{ c.id }}");
+
+
+    console.log(btn);
+    console.log(modal);
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close{{ c.id }}")[0];
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+  modal.style.display = "block";
+   console.log("succesful",modal);
+   console.log("succesful",btn);
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+{% endfor %}
+</script>
+  <script src="{% static 'vehicle/js/jquery.min.js' %}"></script>
+  <script src="{% static 'vehicle/js/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'vehicle/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'vehicle/js/wow.js' %}"></script>
+  <script src="{% static 'vehicle/js/jquery.bxslider.min.js' %}"></script>
+  <script src="{% static 'vehicle/js/custom.js' %}"></script>
+  <script src="{% static 'vehicle/contactform/contactform.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TopLine Limited</title>
+    {% load static %}
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+
+</head>
+
+
+<body>
+
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">TopLine Limited Adiministration</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="nav navbar-nav navbar-right" style="float: right;">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Records
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'vehicle:car-details' %}">View Vehicles</a>
+          <a class="dropdown-item" href="{% url 'vehicle:logbook-details' %}">View Logbooks</a>
+          <a class="dropdown-item" href="{% url 'vehicle:insurance-details' %}">View Insurance</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Disabled</a>
+      </li>
+    </ul>
+
+  </div>
+</nav>
+  <!-------------------------other section ---------------------->
+  <div class="row" style="padding-top: 2rem;">
+
+      <div class="col-md-4 col-xs-2"></div>
+      <div class="col-md-4 col-xs-8">
+          <form action="#" method="GET">
+              <div class="row">
+                  <div class="col-md-8 col-xs-8">
+                        <input class="form-control" type="text" name="date" value="{{ request.GET.date }}">
+                  </div>
+                  <div class="col-md-4 col-xs-4">
+                        <input class="form-control" type="submit" value="search">
+                  </div>
+              </div>
+
+
+          </form>
+      </div>
+      <div class="col-md-4 col-xs-2"></div>
+  </div>
+      <h1 class="bnr-title text-center wow fadeIn delay-05s">Welcome to the admin showdown</h1>
+
+
+            <h1>Its about to get down</h1>
+
+    <!---->
+    <!---->
+
+
+
+
+    <footer id="footer">
+      <div class="container">
+        <div class="row text-center">
+          <p>&copy;All Rights Reserved. 2020</p>
+          <div class="credits">
+            <!--
+              All the links in the footer should remain intact.
+              You can delete the links only if you purchased the pro version.
+              Licensing information: https://bootstrapmade.com/license/
+              Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Baker
+            -->
+            Designed by <a href="#">Alchinsky Milevisky</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!---->
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
