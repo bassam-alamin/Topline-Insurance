@@ -1,1 +1,1 @@
-web: gunicorn Topline.wsgi --log-file
+web: gunicorn Topline.wsgi --log-file -
