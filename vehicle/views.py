@@ -1,3 +1,4 @@
+from apscheduler.schedulers.background import BackgroundScheduler
 from django.contrib.auth.models import User
 from django.views.generic import View, ListView
 from .models import *
@@ -7,7 +8,7 @@ from django.shortcuts import render
 import datetime
 
 
-def broadcast_sms(request):
+def broadcast_sms():
     message_to_broadcast = "Welcome to Topline Limited,Hey Bashir am sorry but ur Insurance is expiring today"
     client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
     today = datetime.datetime.now().date()
@@ -36,8 +37,12 @@ def broadcast_sms(request):
             client.messages.create(to=recipient,
                                    from_=settings.TWILIO_NUMBER,
                                    body=message_to_broadcast)
-    return render(request, "vehicle/home.html")
+    return
 
+def start():
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(broadcast_sms, 'interval', minutes=5)
+    scheduler.start()
 
 class home(ListView):
     template_name = 'vehicle/home.html'
