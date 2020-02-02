@@ -13,7 +13,7 @@ def broadcast_sms():
     client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
     today = datetime.datetime.now().date()
     print(today)
-    today = datetime.datetime(2020, 2, 7)
+    today = datetime.datetime(2020, 2, 1)
     print(today.date())
     insurance = Insurance.objects.all()
     result = insurance.filter(expiry_date__icontains=today.date())
