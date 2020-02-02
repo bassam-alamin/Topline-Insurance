@@ -41,7 +41,7 @@ def broadcast_sms():
 
 def start():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(broadcast_sms, 'interval', minutes=5)
+    scheduler.add_job(broadcast_sms, 'interval', hours=24)
     scheduler.start()
 
 class home(ListView):
