@@ -1,12 +1,12 @@
 from django.conf import settings
 from django.contrib import admin
-from django.conf.urls import url,include
+from django.conf.urls import include
 from django.conf.urls.static import static
-
+from django.urls import re_path
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls, name='admin'),
-    url(r'^', include('vehicle.urls')),
+    re_path(r'^admin/', admin.site.urls, name='admin'),
+    re_path(r'^', include('vehicle.urls')),
 ]
 
 if settings.DEBUG:
