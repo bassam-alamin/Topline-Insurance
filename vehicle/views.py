@@ -8,41 +8,41 @@ from django.shortcuts import render
 import datetime
 
 
-def broadcast_sms():
-    message_to_broadcast = "Welcome to Topline Limited,Hey Bashir am sorry but ur Insurance is expiring today"
-    client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-    today = datetime.datetime.now().date()
-    print(today)
-    today = datetime.datetime(2020, 2, 1)
-    print(today.date())
-    insurance = Insurance.objects.all()
-    result = insurance.filter(expiry_date__icontains=today.date())
-    print("almost there", len(result))
-    for i in result:
-        car = i.car_id
-        cars = Cars.objects.all()
-        sorted_cars = cars.filter(id=car)
-        print("cars are ", len(sorted_cars))
-        for b in sorted_cars:
-            owner = b.car_owner_id
-            owners = Owner.objects.all()
-            sorted_owners = owners.filter(id=owner)
-
-            print("owners are ", len(sorted_owners))
-            for n in sorted_owners:
-                settings.SMS_BROADCAST_TO_NUMBERS.append(n.phone_no)
-
-    for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
-        if recipient:
-            client.messages.create(to=recipient,
-                                   from_=settings.TWILIO_NUMBER,
-                                   body=message_to_broadcast)
-    return
-
-def start():
-    scheduler = BackgroundScheduler()
-    scheduler.add_job(broadcast_sms, 'interval', hours=24)
-    scheduler.start()
+# def broadcast_sms():
+#     message_to_broadcast = "Welcome to Topline Limited,Hey Bashir am sorry but ur Insurance is expiring today"
+#     client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+#     today = datetime.datetime.now().date()
+#     print(today)
+#     today = datetime.datetime(2020, 2, 1)
+#     print(today.date())
+#     insurance = Insurance.objects.all()
+#     result = insurance.filter(expiry_date__icontains=today.date())
+#     print("almost there", len(result))
+#     for i in result:
+#         car = i.car_id
+#         cars = Cars.objects.all()
+#         sorted_cars = cars.filter(id=car)
+#         print("cars are ", len(sorted_cars))
+#         for b in sorted_cars:
+#             owner = b.car_owner_id
+#             owners = Owner.objects.all()
+#             sorted_owners = owners.filter(id=owner)
+#
+#             print("owners are ", len(sorted_owners))
+#             for n in sorted_owners:
+#                 settings.SMS_BROADCAST_TO_NUMBERS.append(n.phone_no)
+#
+#     for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
+#         if recipient:
+#             client.messages.create(to=recipient,
+#                                    from_=settings.TWILIO_NUMBER,
+#                                    body=message_to_broadcast)
+#     return
+#
+# def start():
+#     scheduler = BackgroundScheduler()
+#     scheduler.add_job(broadcast_sms, 'interval', hours=24)
+#     scheduler.start()
 
 class home(ListView):
     template_name = 'vehicle/home.html'

@@ -5,10 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1c07c2f2-f497-48f7-9090-c24735170d10" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Topline/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Topline/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vehicle/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/vehicle/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vehicle/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/vehicle/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vehicle/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/vehicle/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vehicle/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/vehicle/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,7 +141,7 @@
       <workItem from="1692075323478" duration="599000" />
       <workItem from="1692190777655" duration="599000" />
       <workItem from="1692430588714" duration="201000" />
-      <workItem from="1702842115955" duration="1341000" />
+      <workItem from="1702842115955" duration="2126000" />
     </task>
     <servers />
   </component>
